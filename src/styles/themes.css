@@ -1,0 +1,44 @@
+/* Define cores para cada tema */
+:root {
+    --esperanca: #28a745;
+    --sabedoria: #ffcc00;
+    --confianca: #0033cc;
+    --coragem: #ff3300;
+    --amizade: #9900cc;
+    --luz: #ff99cc;
+    --amor: #ff6699;
+    --sinceridade: #66ccff;
+  }
+  
+  .theme-esperanca {
+    --background-color: var(--esperanca);
+  }
+  
+  .theme-sabedoria {
+    --background-color: var(--sabedoria);
+  }
+  
+  .theme-confianca {
+    --background-color: var(--confianca);
+  }
+  
+  .theme-coragem {
+    --background-color: var(--coragem);
+  }
+  
+  .theme-amizade {
+    --background-color: var(--amizade);
+  }
+  
+  .theme-luz {
+    --background-color: var(--luz);
+  }
+  
+  .theme-amor {
+    --background-color: var(--amor);
+  }
+  
+  .theme-sinceridade {
+    --background-color: var(--sinceridade);
+  }
+  

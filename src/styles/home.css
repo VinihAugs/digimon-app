@@ -1,0 +1,138 @@
+.home-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    background: url('/public/screens/sem_tema.png') no-repeat center center/cover;
+    padding: 2rem;
+    transition: background 0.3s ease;
+  }
+  
+  .logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1rem;
+  }
+  
+  .logo img {
+    width: 150px;
+  }
+  
+  .title {
+    font-family: 'Jackpot', sans-serif;
+    font-size: 3rem;
+    color: #ff6600;
+  }
+  
+  .subtitle {
+    font-family: 'Pixel Digivolve', sans-serif;
+    font-size: 2rem;
+    color: #0055ff;
+  }
+  
+  .search-container {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 1rem;
+  }
+  
+  .search-container input {
+    width: 250px;
+    padding: 0.8rem;
+    border-radius: 10px;
+    font-size: 1rem;
+  }
+  
+  .search-icon {
+    cursor: pointer;
+  }
+  
+  .buttons-container {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1rem;
+  }
+  
+  .buttons-container button {
+    padding: 1rem 1.5rem;
+    border-radius: 10px;
+    font-size: 1rem;
+    font-weight: bold;
+    background-color: #ff6600;
+    color: white;
+    transition: 0.3s;
+  }
+  
+  .buttons-container button:hover {
+    background-color: #cc5200;
+  }
+  
+  /* Estiliza os botões de tema */
+  .theme-buttons {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+  }
+  
+  .theme-buttons button {
+    width: 55px;
+    height: 55px;
+    border-radius: 50%;
+    background-color: var(--theme-color);
+    transition: 0.3s;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .theme-buttons button.selected {
+    background-color: white;
+    border: 2px solid var(--theme-color);
+  }
+
+  .theme-buttons img {
+    align-items: center;
+    margin-bottom: 2px;
+  }
+
+  .theme-buttons p {
+    display:block;
+    font-size: x-small;
+    color: white;
+  }
+
+  /* Responsividade */
+  @media (max-width: 1366px) {
+    .title {
+      font-size: 2.5rem;
+    }
+    
+    .subtitle {
+      font-size: 1.5rem;
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .home-container {
+      padding: 1rem;
+      text-align: center;
+    }
+  
+    .theme-buttons {
+      flex-direction: column;
+      right: auto;
+      left: 10px;
+    }
+  
+    .buttons-container {
+      flex-direction: column;
+      align-items: center;
+    }
+  }
