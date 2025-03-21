@@ -1,74 +1,189 @@
+@import url('https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400..700&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900&display=swap');
+@import url('https://fonts.cdnfonts.com/css/pixel-digivolve');
+
+@font-face {
+    font-family: 'Jackpot';
+    src: url('../../public/font/JackpotDemo.ttf') format('truetype');
+    font-weight: 400;
+    font-style: normal;
+}
+
 .home-container {
     display: flex;
-    flex-direction: column;
     align-items: center;
-    justify-content: center;
     min-height: 100vh;
-    background: url('/public/screens/sem_tema.png') no-repeat center center/cover;
     padding: 2rem;
     transition: background 0.3s ease;
+    background-repeat: no-repeat; 
+  }
+
+  .home-content {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
   }
   
-  .logo {
+  .home-text {
     display: flex;
     align-items: center;
-    justify-content: center;
-    margin-bottom: 1rem;
+  }
+
+  .home-text h1 {
+    font-family: 'Jackpot', cursive;
+    font-weight: 400;
+    font-size: 40px;
+    width: auto; 
+    height: auto; 
+    color: #F46D1B;
+    margin: 0; 
+}
+
+.home-text h2 {
+  font-family: 'pixel digivolve', sans-serif; 
+  font-weight: 400;
+  font-size: 48px;
+  color: #34AC40; 
+  margin: 0; 
+}
+  .image-logo {
+    display: flex;
+    position: relative;
+    left: -60px;
+    width: 150px;
+    margin-bottom: 2px
   }
   
-  .logo img {
+  .image-logo img {
     width: 150px;
   }
   
-  .title {
-    font-family: 'Jackpot', sans-serif;
-    font-size: 3rem;
-    color: #ff6600;
-  }
-  
-  .subtitle {
-    font-family: 'Pixel Digivolve', sans-serif;
-    font-size: 2rem;
-    color: #0055ff;
-  }
-  
-  .search-container {
+  .text-logo{
     display: flex;
     align-items: center;
-    gap: 0.5rem;
+    flex-direction: column;
+  }
+
+  .title {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    font-size: 16px;
+    width: 327px;
+    height: 16px;
+    color: #F46D1B;
+    text-align: left;
+    position: relative;
+    line-height: 100%;
+    letter-spacing: 0;
+    left: 2px;
+}
+
+.title2 {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 500;
+  font-size: 64px;
+  width: 498px;
+  height: 146px;
+  color: #666666;
+  margin-bottom: 10px;
+  line-height: 1; 
+}
+  
+  .description {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 400;
+    font-size: 18px;
+    width: 488px;
+    height: 159px;
+    color: #666666;
+    margin-bottom: 1px
+  }
+
+  .search-input{
+    position: relative;
+    top: 44.81%;
+    display: flex;
+  }
+
+.search-input input{
+    background-color: #fff;
+    width: 494px; 
+    height: 50px;
+    border: none;
+    font-size: 0.875rem;
+    line-height: 1.059rem;
+    border-radius: 0.625rem;
+    position: relative;
+    outline-color: rgb(7, 169, 7);
+}
+
+.icon {
+    position: relative;
+    width: 40px;
+    height: 40px;
+    right: 45px;
+    color: rgb(7, 169, 7);
+}
+
+  .action-buttons {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 103px;
     margin-top: 1rem;
+    width: 495px;
   }
-  
-  .search-container input {
-    width: 250px;
-    padding: 0.8rem;
-    border-radius: 10px;
-    font-size: 1rem;
-  }
-  
-  .search-icon {
-    cursor: pointer;
-  }
-  
+
   .buttons-container {
     display: flex;
+    justify-content: space-between;
+    align-items: center;
     gap: 1rem;
     margin-top: 1rem;
+    width: 495px;
   }
   
-  .buttons-container button {
-    padding: 1rem 1.5rem;
-    border-radius: 10px;
-    font-size: 1rem;
-    font-weight: bold;
-    background-color: #ff6600;
+  .buttons-container .choose-digimon {
+    width: 226px;
+    height: 43px;
+    border-radius: 20px;
+    background-color: #F46D1B;
     color: white;
-    transition: 0.3s;
+    font-family: 'Poppins', sans-serif;
+    font-weight: bold;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    text-align: center;
+    line-height: 43px;
   }
-  
-  .buttons-container button:hover {
+
+.buttons-container .choose-digimon:hover {
     background-color: #cc5200;
-  }
+}
+
+.buttons-container .view-all {
+    width: 166px;
+    height: 43px;
+    border-radius: 20px;
+    color: white;
+    font-family: 'Poppins', sans-serif;
+    font-weight: bold;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    text-align: center;
+    line-height: 43px; 
+}
+
+.buttons-container .view-all.theme-selected {
+    background-color: var(--theme-color); /* Cor do tema selecionado */
+}
+
+.buttons-container .view-all:hover {
+    background-color: #2a8c30; /* Cor verde escura ao passar o mouse */
+}
   
   /* Estiliza os botões de tema */
   .theme-buttons {
@@ -81,8 +196,8 @@
   }
   
   .theme-buttons button {
-    width: 55px;
-    height: 55px;
+    width: 60px;
+    height: 60px;
     border-radius: 50%;
     background-color: var(--theme-color);
     transition: 0.3s;
@@ -107,6 +222,20 @@
     font-size: x-small;
     color: white;
   }
+
+  .view-all{
+    border-radius: 100px;
+    width: 166px;
+    height: 43px;
+    background-color: #34AC40
+}
+
+  .choose-digimon{
+    border-radius: 100px;
+    width: 266px;
+    height: 43px;
+    background-color: #F46D1B !important; 
+}
 
   /* Responsividade */
   @media (max-width: 1366px) {
