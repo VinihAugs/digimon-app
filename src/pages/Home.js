@@ -8,13 +8,17 @@ import { BiSearch } from "react-icons/bi";
 const themes = [
   { name: "Esperança", color: "#209441", buttoncolor: "#6BD476", image: "/button_dark/esperanca.png", fundo : "/screens/home_esperanca.png"},
   { name: "Sabedoria", color: "#CB1E31", buttoncolor: "#6BD476",image: "/button_dark/sabedoria.png", fundo : "/screens/home_sabedoria.png"},
-  { name: "Confiança", color: "#7D4D8B", buttoncolor: "#CBAADE",image: "/button_dark/confianca.png", fundo : "/screens/home_confianca.png"},
+  { name: "Confianca", color: "#7D4D8B", buttoncolor: "#CBAADE",image: "/button_dark/confianca.png", fundo : "/screens/home_confianca.png"},
   { name: "Coragem", color: "#0580BB", buttoncolor: "#62B8DB",image: "/button_dark/coragem.png", fundo : "/screens/home_coragem.png"},
   { name: "Amizade", color: "#E28C25", buttoncolor: "#78D1F1",image: "/button_dark/amizade.png", fundo :"/screens/home_amizade.png"},
   { name: "Luz", color: "#EA7EB2", buttoncolor: "#CBAADE",image: "/button_dark/luz.png", fundo : "/screens/home_luz.png"},
   { name: "Amor", color: "#62B8DB", buttoncolor: "#CBAADE",image: "/button_dark/amor.png", fundo : "/screens/home_amor.png"},
   { name: "Sinceridade", color: "#F282B0", buttoncolor: "#CBAADE",image: "/button_dark/sinceridade.png", fundo : "/screens/home_sinceridade.png"},
 ];
+
+const Notheme = [
+  { name: "sem_tema", image : "/screens/sem_tema.png" },
+]
 
 const Home = () => {
   const { selectedTheme, setSelectedTheme } = useCustomTheme();
@@ -26,10 +30,14 @@ const Home = () => {
   }
 
   return (
-    <div className="home-container" style={{ backgroundImage: `url(${selectedTheme.fundo || defaultBackground})`, backgroundPosition: 'right' }}>
+    <div className="home-container" style={{ 
+      backgroundImage: `url(${selectedTheme.fundo || defaultBackground})`, 
+      backgroundPosition: 'center',
+      backgroundSize: 'cover' // Reverte a limitação do tamanho da imagem de fundo
+    }}>
       <div className="home-content">
         <div className="home-text">
-          <img className="image-logo" src="/screens/Mask.png" alt="Mask" />
+          <img className="image-logo" src={selectedTheme.fundo === defaultBackground ? "/screens/Mask.png" : "/screens/Logo.png"} alt="Logo" />
           <div className='text-logo'>
             <h1>FPR</h1>
             <h2>DIGIMON</h2>
@@ -46,9 +54,7 @@ const Home = () => {
         mundo real.</p>
         <div className="search-input">
           <input placeholder='   Digite o nome do DIGIMON'/>
-          <button className="search-button">
             <BiSearch className='icon'/>
-          </button>
         </div>
 
         <div className="action-buttons">
@@ -62,9 +68,12 @@ const Home = () => {
           <button
             key={theme.name}
             className={`theme-button ${selectedTheme.name === theme.name ? "selected" : ""}`}
-            style={{ backgroundColor: selectedTheme.name === theme.name ? "white" : theme.color }}
+            style={{ 
+              backgroundColor: selectedTheme.name === theme.name ? "white" : theme.color,
+              color: selectedTheme.name === theme.name ? theme.color : "white"
+            }}
             onClick={() => setSelectedTheme(theme)}> 
-            <img src={theme.image} alt={theme.name} />
+            <img src={selectedTheme.name === theme.name ? `/button_light/${theme.name.toLowerCase()}.png` : theme.image} alt={theme.name} />
             <p>{theme.name}</p>
           </button>
         ))}
