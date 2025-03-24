@@ -1,11 +1,12 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom'; // Importar useNavigate
 import { ThemeContext } from '../context/ThemeContext';
 import { useCustomTheme } from "../context/ThemeContext";
 import "../styles/home.css";
 import "../styles/themes.css";
 import { BiSearch } from "react-icons/bi";
 
-const themes = [
+export const themes = [
   { name: "Esperança", color: "#209441", buttoncolor: "#6BD476", image: "/button_dark/esperanca.png", fundo : "/screens/home_esperanca.png"},
   { name: "Sabedoria", color: "#CB1E31", buttoncolor: "#6BD476",image: "/button_dark/sabedoria.png", fundo : "/screens/home_sabedoria.png"},
   { name: "Confianca", color: "#7D4D8B", buttoncolor: "#CBAADE",image: "/button_dark/confianca.png", fundo : "/screens/home_confianca.png"},
@@ -16,12 +17,32 @@ const themes = [
   { name: "Sinceridade", color: "#F282B0", buttoncolor: "#CBAADE",image: "/button_dark/sinceridade.png", fundo : "/screens/home_sinceridade.png"},
 ];
 
-const Notheme = [
-  { name: "sem_tema", image : "/screens/sem_tema.png" },
-]
+export const Notheme = {
+  name: "sem_tema",
+  color: "#34AC40",
+  buttoncolor: "#34AC40",
+  fundo: "/screens/sem_tema.png"
+};
 
 const Home = () => {
   const { selectedTheme, setSelectedTheme } = useCustomTheme();
+  const [searchTerm, setSearchTerm] = useState("");
+  const navigate = useNavigate(); // Inicializar useNavigate
+
+  useEffect(() => {
+    setSelectedTheme(Notheme);
+  }, [setSelectedTheme]);
+
+  const handleSearch = () => {
+    console.log("Buscando por:", searchTerm);
+    navigate(`/search?query=${searchTerm}`); // Navegar para SearchPage com o termo de busca
+  };
+
+  const handleKeyPress = (event) => {
+    if (event.key === 'Enter') {
+      handleSearch();
+    }
+  };
 
   const defaultBackground = "/screens/sem_tema.png";
 
@@ -31,34 +52,40 @@ const Home = () => {
 
   return (
     <div className="home-container" style={{ 
-      backgroundImage: `url(${selectedTheme.fundo || defaultBackground})`, 
-      backgroundPosition: 'center',
-      backgroundSize: 'cover' // Reverte a limitação do tamanho da imagem de fundo
+      backgroundImage: `url(${selectedTheme.fundo || defaultBackground})`
     }}>
+      <div className="header-icon">
+        <img src="/screens/theme.png" alt="Theme Icon" />
+      </div>
       <div className="home-content">
         <div className="home-text">
           <img className="image-logo" src={selectedTheme.fundo === defaultBackground ? "/screens/Mask.png" : "/screens/Logo.png"} alt="Logo" />
           <div className='text-logo'>
-            <h1>FPR</h1>
-            <h2>DIGIMON</h2>
+            <h1 className={selectedTheme.name === "sem_tema" ? "title-orange" : "title-white"}>FPR</h1>
+            <h2 className={selectedTheme.name === "sem_tema" ? "subtitle-green" : "subtitle-white"}>DIGIMON</h2>
           </div>
         </div>
       
         <h1 className="title">Bem vindo ao FPR DIGIMON</h1>
-        <h2 className="title2">Escolha o<br />seu Digimon</h2>
-        <p className="description">
+        <h2 className={`title2 ${selectedTheme.name === "sem_tema" ? "text-gray" : "text-white"}`}>Escolha o<br />seu Digimon</h2>
+        <p className={`description ${selectedTheme.name === "sem_tema" ? "text-gray" : "text-white"}`}>
         O Universo Digimon é um mundo digital onde vivem<br /> 
         os Digimons, criaturas virtuais que formam laços com<br />
         parceiros humanos. Juntos, eles enfrentam desafios e<br />
         vilões para proteger tanto o Mundo Digital quanto o<br /> 
         mundo real.</p>
         <div className="search-input">
-          <input placeholder='   Digite o nome do DIGIMON'/>
-            <BiSearch className='icon'/>
+          <input 
+            placeholder='   Digite o nome do DIGIMON'
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+            onKeyDown={handleKeyPress}
+          />
+          <BiSearch className='icon' onClick={handleSearch} />
         </div>
 
         <div className="action-buttons">
-          <button className="choose-digimon" style={{ backgroundColor: selectedTheme.color }}>ESCOLHA SEU DIGIMON</button>
+          <button className="choose-digimon" style={{ backgroundColor: selectedTheme.color }} onClick={handleSearch}>ESCOLHA SEU DIGIMON</button>
           <button className="view-all" style={{ backgroundColor: selectedTheme.name === "sem_tema" ? "#34AC40" : selectedTheme.buttoncolor }}>VER TODOS</button>
         </div>
       </div>

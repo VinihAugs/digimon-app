@@ -16,12 +16,14 @@
     transition: background 0.3s ease;
     background-repeat: no-repeat; 
     background-position: center;
-    background-size: cover; /* Reverte a limitação do tamanho da imagem de fundo */
+    background-size: cover;
     padding: 0;
     margin: 0;
     width: 100vw;
     height: 100vh;
     justify-content: flex-start;
+    background-position: center;
+    background-size: cover;
 }
 
 .home-content {
@@ -71,6 +73,7 @@
     display: flex;
     align-items: center;
     flex-direction: column;
+    color: white;
 }
 
 .title {
@@ -96,6 +99,7 @@
   color: #666666;
   margin-bottom: 10px;
   line-height: 1; 
+  color: white;
 }
   
 .description {
@@ -105,7 +109,8 @@
     width: 488px;
     height: 159px;
     color: #666666;
-    margin-bottom: 1px
+    margin-bottom: 1px;
+    color: white;
 }
 
 .search-input {
@@ -123,14 +128,15 @@
     line-height: 1.059rem;
     border-radius: 0.625rem;
     outline-color: rgb(7, 169, 7);
-    padding-right: 40px; /* Espaço para o ícone */
+    padding-right: 40px;
+    padding: 10px;
 }
 
 .icon {
     position: absolute;
-    right: 10px; /* Posiciona o ícone dentro do campo de entrada */
+    right: 10px;
     color: rgb(7, 169, 7);
-    pointer-events: none; /* Permite clicar no campo de entrada através do ícone */
+    z-index: 1;
 }
 
 .action-buttons {
@@ -187,14 +193,13 @@
 }
 
 .buttons-container .view-all.theme-selected {
-    background-color: var(--theme-color); /* Cor do tema selecionado */
+    background-color: var(--theme-color);
 }
 
 .buttons-container .view-all:hover {
-    background-color: #2a8c30; /* Cor verde escura ao passar o mouse */
+    background-color: #2a8c30;
 }
   
-/* Estiliza os botões de tema */
 .theme-buttons {
     position: absolute;
     top: 10px;
@@ -214,22 +219,25 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-}
-  
-.theme-buttons button.selected {
-    background-color: white;
-    border: 2px solid var(--theme-color);
+    color: white;
+    text-align: center;
 }
 
 .theme-buttons img {
-    align-items: center;
-    margin-bottom: 2px;
+    margin-bottom: 5px;
 }
 
 .theme-buttons p {
-    display: block;
     font-size: x-small;
     color: white;
+    margin: 0;
+    padding: 0;
+    margin-top: -4px; /* Subir o texto 4px acima do final da elipse */
+}
+
+.theme-buttons button.selected {
+    background-color: white;
+    border: 2px solid var(--theme-color);
 }
 
 .theme-buttons button.selected p {
@@ -264,7 +272,24 @@
     background-color: #F46D1B !important; 
 }
 
-/* Responsividade */
+.header-icon {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background-color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.header-icon img {
+    width: 40px;
+    height: 40px;
+}
+
 @media (max-width: 1366px) {
     .title {
       font-size: 2.5rem;
@@ -291,4 +316,39 @@
       flex-direction: column;
       align-items: center;
     }
+}
+
+.title-orange {
+  color: #F46D1B;
+}
+
+.title-white {
+  color: white;
+}
+
+.subtitle-green {
+  color: #34AC40;
+}
+
+.subtitle-white {
+  color: white;
+}
+
+.text-gray {
+  color: #666666;
+}
+
+.text-white {
+  color: white;
+}
+
+.search-page {
+  background-position: center;
+  background-size: cover;
+  opacity: 0.8;
+}
+
+.theme-button.selected {
+  background-color: white;
+  color: var(--theme-color);
 }
