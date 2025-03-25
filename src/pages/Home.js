@@ -55,6 +55,7 @@ const Home = () => {
 
   const defaultBackground = "/screens/sem_tema.png";
 
+  
   if (!selectedTheme) {
     return <div>Carregando tema...</div>;
   }
