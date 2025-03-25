@@ -1,32 +1,38 @@
 import React, { useState, useEffect } from "react";
 import { useCustomTheme } from "../context/ThemeContext";
-import { useLocation } from 'react-router-dom'; // Importar useLocation
+import { useLocation } from 'react-router-dom';
 import "../styles/global.css";
-import "../styles/home.css"; // Importar estilos da home
+import "../styles/home.css";
 import DigimonCard from "../assets/DigimonCard";
-import { themes, Notheme } from "./Home"; // Importar temas e Notheme
+import { themes, Notheme } from "./Home";
 
 const SearchPage = () => {
   const { selectedTheme, setSelectedTheme } = useCustomTheme();
-  const defaultBackground = Notheme.fundo; // Definir defaultBackground com base no Notheme
+  const location = useLocation();
+  const searchQuery = location.state?.searchQuery || ""; // Recebe o valor do input ou vazio
+  const defaultBackground = Notheme.fundo;
   const [digimons, setDigimons] = useState([]);
-  const [search, setSearch] = useState("");
+  const [search, setSearch] = useState(searchQuery); // Inicializa com o valor recebido
   const [filter, setFilter] = useState("");
-  const [currentPage, setCurrentPage] = useState(1); // Estado para a página atual
-  const location = useLocation(); // Inicializar useLocation
-
-  useEffect(() => {
-    const query = new URLSearchParams(location.search).get('query');
-    if (query) {
-      setSearch(query);
-    }
-  }, [location]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [selectedDigimon, setSelectedDigimon] = useState(null);
 
   useEffect(() => {
     fetch("https://digimon-api.vercel.app/api/digimon")
       .then((response) => response.json())
       .then((data) => setDigimons(data));
   }, []);
+
+  useEffect(() => {
+    if (search) {
+      const foundDigimon = digimons.find((digimon) =>
+        digimon.name.toLowerCase() === search.toLowerCase()
+      );
+      setSelectedDigimon(foundDigimon || null);
+    } else {
+      setSelectedDigimon(null);
+    }
+  }, [search, digimons]);
 
   const filteredDigimons = digimons.filter((digimon) =>
     digimon.name.toLowerCase().includes(search.toLowerCase()) &&
@@ -40,14 +46,51 @@ const SearchPage = () => {
   const background = selectedTheme.fundo || Notheme.fundo;
 
   return (
-    <div className="search-page" style={{ backgroundImage: `url(${background})` }}>
-      {/* <div className="dark-overlay"></div> */}
+    <div
+      className="search-page"
+      style={{
+        backgroundImage: `url(${background})`,
+        height: "100vh", // Ocupa 100% da altura da tela
+        overflow: "hidden", // Remove a rolagem
+      }}
+    >
       <div className="content">
         <div className="header-container">
-        <img className="icone" src={selectedTheme.fundo === defaultBackground ? "/screens/Mask.png" : "/screens/Logo.png"} alt="Logo" />
-          <div className="text-container">
-            <p className="title">FPR</p>
-            <p className="subtitle">DIGIMON</p>
+          <div className="group-left">
+            <div className="icone">
+              <img src={selectedTheme.fundo === defaultBackground ? "/screens/Mask.png" : "/screens/Logo.png"} alt="Logo" />
+            </div>
+            <div className="text-container">
+              <h1 className={selectedTheme.name === "sem_tema" ? "title-orange" : "text-white"}>FPR</h1>
+              <h2 className={selectedTheme.name === "sem_tema" ? "subtitle-green" : "text-white"}>DIGIMON</h2>
+            </div>
+          </div>
+          <div className="group-right">
+            <div className="icon-container">
+              {selectedDigimon ? (
+                <img src={selectedDigimon.img} alt={selectedDigimon.name} />
+              ) : (
+                <img src="/screens/theme.png" alt="Theme Icon" />
+              )}
+            </div>
+            <input
+              type="text"
+              placeholder="Buscar Digimon"
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+            />
+            <select
+              value={filter}
+              onChange={(e) => setFilter(e.target.value)}
+            >
+              <option value="">Level</option>
+              <option value="In Training">In Training</option>
+              <option value="Rookie">Rookie</option>
+              <option value="Champion">Champion</option>
+              <option value="Ultimate">Ultimate</option>
+              <option value="Mega">Mega</option>
+              <option value="Fresh">Fresh</option>
+            </select>
           </div>
         </div>
         <div className="theme-buttons">
@@ -65,38 +108,34 @@ const SearchPage = () => {
             </button>
           ))}
         </div>
-        <div className="search-filters">
-          <div className="icon-container">
-            <img src="/screens/theme.png" alt="Theme Icon" />
-          </div>
-          <input
-            type="text"
-            placeholder="Buscar Digimon"
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
-          />
-          <select value={filter} onChange={(e) => setFilter(e.target.value)}>
-            <option value="">Level</option>
-            <option value="In Training">In Training</option>
-            <option value="Rookie">Rookie</option>
-            <option value="Champion">Champion</option>
-            <option value="Ultimate">Ultimate</option>
-            <option value="Mega">Mega</option>
-            <option value="Fresh">Fresh</option>
-          </select>
-        </div>
         <div className="digimon-grid">
           {currentItems.map((digimon) => (
-            <DigimonCard key={digimon.name} name={digimon.name} img={digimon.img} level={digimon.level} />
+            <DigimonCard 
+              key={digimon.name} 
+              name={digimon.name} 
+              img={digimon.img} 
+              level={digimon.level} 
+              textColor={selectedTheme.name === "sem_tema" ? "black" : "white"} // Passar a cor como prop
+            />
           ))}
         </div>
         {totalPages > 1 && (
           <div className="pagination">
             {currentPage > 1 && (
-              <button onClick={() => setCurrentPage(currentPage - 1)}>Anterior</button>
+              <button 
+                onClick={() => setCurrentPage(currentPage - 1)} 
+                className="pagination-button"
+              >
+                ← Anterior
+              </button>
             )}
             {currentPage < totalPages && (
-              <button onClick={() => setCurrentPage(currentPage + 1)}>Próximo</button>
+              <button 
+                onClick={() => setCurrentPage(currentPage + 1)} 
+                className="pagination-button"
+              >
+                Próximo →
+              </button>
             )}
           </div>
         )}

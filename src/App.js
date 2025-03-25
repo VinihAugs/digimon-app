@@ -8,6 +8,9 @@ function App() {
   return (
     <ThemeProvider> {/* Envolver o Router com ThemeProvider */}
       <Router>
+        <header>
+          {/* Removido themeImage */}
+        </header>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/search" element={<SearchPage />} /> {/* Adicionar rota para SearchPage */}

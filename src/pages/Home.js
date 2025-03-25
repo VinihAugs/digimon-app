@@ -5,6 +5,7 @@ import { useCustomTheme } from "../context/ThemeContext";
 import "../styles/home.css";
 import "../styles/themes.css";
 import { BiSearch } from "react-icons/bi";
+import DigimonCard from "../assets/DigimonCard";
 
 export const themes = [
   { name: "Esperança", color: "#209441", buttoncolor: "#6BD476", image: "/button_dark/esperanca.png", fundo : "/screens/home_esperanca.png"},
@@ -27,7 +28,7 @@ export const Notheme = {
 const Home = () => {
   const { selectedTheme, setSelectedTheme } = useCustomTheme();
   const [searchTerm, setSearchTerm] = useState("");
-  const navigate = useNavigate(); // Inicializar useNavigate
+  const navigate = useNavigate();
 
   useEffect(() => {
     setSelectedTheme(Notheme);
@@ -35,13 +36,21 @@ const Home = () => {
 
   const handleSearch = () => {
     console.log("Buscando por:", searchTerm);
-    navigate(`/search?query=${searchTerm}`); // Navegar para SearchPage com o termo de busca
+    navigate(`/search?query=${searchTerm}`);
   };
 
   const handleKeyPress = (event) => {
     if (event.key === 'Enter') {
-      handleSearch();
+      handleChooseDigimon();
     }
+  };
+
+  const handleChooseDigimon = () => {
+    navigate("/search", { state: { searchQuery: searchTerm } });
+  };
+
+  const handleViewAll = () => {
+    navigate("/search", { state: { searchQuery: "" } });
   };
 
   const defaultBackground = "/screens/sem_tema.png";
@@ -61,8 +70,8 @@ const Home = () => {
         <div className="home-text">
           <img className="image-logo" src={selectedTheme.fundo === defaultBackground ? "/screens/Mask.png" : "/screens/Logo.png"} alt="Logo" />
           <div className='text-logo'>
-            <h1 className={selectedTheme.name === "sem_tema" ? "title-orange" : "title-white"}>FPR</h1>
-            <h2 className={selectedTheme.name === "sem_tema" ? "subtitle-green" : "subtitle-white"}>DIGIMON</h2>
+            <h1 className={selectedTheme.name === "sem_tema" ? "title-orange" : "text-white"}>FPR</h1>
+            <h2 className={selectedTheme.name === "sem_tema" ? "subtitle-green" : "text-white"}>DIGIMON</h2>
           </div>
         </div>
       
@@ -85,8 +94,8 @@ const Home = () => {
         </div>
 
         <div className="action-buttons">
-          <button className="choose-digimon" style={{ backgroundColor: selectedTheme.color }} onClick={handleSearch}>ESCOLHA SEU DIGIMON</button>
-          <button className="view-all" style={{ backgroundColor: selectedTheme.name === "sem_tema" ? "#34AC40" : selectedTheme.buttoncolor }}>VER TODOS</button>
+          <button className="choose-digimon" style={{ backgroundColor: selectedTheme.color }} onClick={handleChooseDigimon}>ESCOLHA SEU DIGIMON</button>
+          <button className="view-all" style={{ backgroundColor: selectedTheme.name === "sem_tema" ? "#34AC40" : selectedTheme.buttoncolor }} onClick={handleViewAll}>VER TODOS</button>
         </div>
       </div>
 
