@@ -61,8 +61,10 @@ const Home = () => {
   }
 
   return (
-    <div className="home-container" style={{ 
-      backgroundImage: `url(${selectedTheme.fundo || defaultBackground})`
+    <div className={`home-container ${selectedTheme.name  !== "sem_tema" && "home-content-mobile"}`} style={{ 
+      backgroundImage: `url(${selectedTheme.fundo || defaultBackground})`,
+      backgroundPosition: selectedTheme.name === "sem_tema" ? "right" : "center",
+      backgroundSize: selectedTheme.name === "sem_tema" ? "inherit" : "cover",
     }}>
       <div className="header-icon">
         <img src="/screens/theme.png" alt="Theme Icon" />

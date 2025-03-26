@@ -27,6 +27,18 @@ body, html {
     width: 100vw;
     height: 100vh;
     justify-content: flex-start;
+    
+    @media (max-width: 640px) {
+      background-position: center !important;
+      background-size: contain !important;
+    }
+}
+
+.home-content-mobile {
+  @media (max-width: 640px) {
+    background-position: right !important;
+    background-size: cover !important;
+  }
 }
 
 .home-content {
@@ -36,11 +48,24 @@ body, html {
     right: 20px;
     margin-left: 177px;
     align-items: flex-start;
+
+    @media (max-width: 640px) {
+      margin-left: 0;
+      background: rgba(0, 0, 0, 0.5);
+      box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.6);
+      height: 100vh;
+      padding-top: 70px;
+      gap: 8px;
+      }
 }
   
 .home-text {
     display: flex;
     align-items: center;
+
+    @media(max-width: 640px) {
+      gap: 20px;
+    }
 }
 
 .home-text h1 {
@@ -51,6 +76,10 @@ body, html {
     height: auto; 
     color: #F46D1B;
     margin: 0; 
+
+    @media (max-width: 640px) {
+      font-size: 30px;
+    }
 }
 
 .home-text h2 {
@@ -59,6 +88,10 @@ body, html {
   font-size: 48px;
   color: #34AC40; 
   margin: 0; 
+
+  @media (max-width: 640px) {
+    font-size: 40px;
+  }
 }
 
 .image-logo {
@@ -66,7 +99,12 @@ body, html {
     position: relative;
     left: -60px;
     width: 150px;
-    margin-bottom: 2px
+    margin-bottom: 2px;
+
+    @media (max-width: 640px) {
+      position: unset;
+      width: 100px;
+    }
 }
   
 .image-logo img {
@@ -92,6 +130,12 @@ body, html {
     line-height: 100%;
     letter-spacing: 0;
     left: 2px;
+
+    @media(max-width: 640px) {
+      font-size: 14px;
+      text-align: center;
+      height: auto;
+    }
 }
 
 .title2 {
@@ -115,12 +159,27 @@ body, html {
     color: #666666;
     margin-bottom: 1px;
     color: white;
+
+    @media(max-width: 640px) {
+      color: white;
+      font-size: 18px !important;
+      text-align: start !important;
+      height: auto;
+      margin-left: 27px;
+      line-height: 1;
+      width: 55% !important;
+    }
 }
 
 .search-input {
     display: flex;
     align-items: center;
     position: relative;
+
+    @media(max-width: 640px) {
+      width: 50%;
+      margin-left: 27px;
+    }
 }
 
 .search-input input {
@@ -150,6 +209,13 @@ body, html {
     gap: 103px;
     margin-top: 1rem;
     width: 495px;
+
+    @media(max-width: 640px) {
+      width: 50%;
+      margin-left: 27px;
+      flex-direction: column;
+      gap:10px;
+    }
 }
 
 .buttons-container {
@@ -213,6 +279,10 @@ body, html {
     position: absolute;
     top: 10px;
     right: 10px;
+
+    @media(max-width: 640px) {
+        flex-direction: column;
+    }
 }
 
 .search-page .theme-buttons {
@@ -277,7 +347,11 @@ body, html {
     border-radius: 100px;
     width: 166px;
     height: 43px;
-    background-color: #34AC40
+    background-color: #34AC40;
+
+    @media(max-width: 640px) {
+      width: 266px;
+    }
 }
 
 .choose-digimon{
@@ -438,36 +512,13 @@ body, html {
     border-color: #34AC40;
 }
 
-@media (max-width: 1366px) {
-    .title {
-      font-size: 2.5rem;
-    }
-    
-    .subtitle {
-      font-size: 1.5rem;
-    }
-}
-  
-@media (max-width: 768px) {
-    .home-container {
-      padding: 1rem;
-      text-align: center;
-    }
-  
-    .theme-buttons {
-      flex-direction: column;
-      right: auto;
-      left: 10px;
-    }
-  
-    .buttons-container {
-      flex-direction: column;
-      align-items: center;
-    }
-}
-
 .title-orange {
   color: #F46D1B;
+
+  @media (max-width: 640px) {
+    color: white;
+    font-size: 35px;
+  }
 }
 
 .title-white {
@@ -484,6 +535,15 @@ body, html {
 
 .text-gray {
   color: #666666;
+
+  @media(max-width: 640px) {
+    color: white;
+    font-size: 45px;
+    text-align: center;
+    width: auto;
+    height: auto;
+    margin-left: 27px;
+  }
 }
 
 .text-white {
@@ -699,127 +759,4 @@ body, html {
 .theme-button.selected {
   background-color: white;
   color: var(--theme-color);
-}
-
-/* Estilos para telas com largura de 1920px */
-@media (min-width: 1920px) {
-  .home-container {
-    padding: 3rem;
-    background-size: cover;
-  }
-
-  .home-content {
-    margin-left: 200px;
-  }
-
-  .title2 {
-    font-size: 72px;
-    width: 600px;
-  }
-
-  .description {
-    font-size: 20px;
-    width: 550px;
-  }
-
-  .search-input input {
-    width: 550px;
-  }
-
-  .action-buttons {
-    gap: 120px;
-    width: 550px;
-  }
-}
-
-/* Estilos para telas com largura de 1366px */
-@media (max-width: 1366px) {
-  .home-container {
-    padding: 1.5rem;
-    background-size: contain;
-  }
-
-  .home-content {
-    margin-left: 100px;
-  }
-
-  .title2 {
-    font-size: 48px;
-    width: 400px;
-  }
-
-  .description {
-    font-size: 16px;
-    width: 450px;
-  }
-
-  .search-input input {
-    width: 450px;
-  }
-
-  .action-buttons {
-    gap: 80px;
-    width: 450px;
-  }
-}
-
-/* Estilos para dispositivos móveis */
-@media (max-width: 768px) {
-  .home-container {
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-start;
-    padding: 1rem;
-    background-position: right;
-    background-size: contain;
-  }
-
-  .home-content {
-    margin-left: 0;
-    align-items: center;
-    text-align: center;
-  }
-
-  .home-text {
-    flex-direction: column;
-    align-items: center;
-  }
-  
-
-  .image-logo {
-    position: static;
-    width: 100px;
-    margin-bottom: 1rem;
-  }
-
-  .title2 {
-    font-size: 36px;
-    width: auto;
-  }
-
-  .description {
-    font-size: 14px;
-    width: auto;
-  }
-
-  .search-input input {
-    width: 100%;
-    max-width: 300px;
-  }
-
-  .action-buttons {
-    flex-direction: column;
-    gap: 1rem;
-    width: 100%;
-    max-width: 300px;
-  }
-
-  .theme-buttons {
-    flex-direction: column;
-    align-items: flex-start;
-    position: fixed;
-    top: 10px;
-    left: 10px;
-    gap: 1rem;
-  }
 }
