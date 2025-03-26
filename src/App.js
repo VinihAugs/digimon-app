@@ -1,24 +1,20 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Home from './pages/Home';
-import SearchPage from './pages/SearchPage'; // Importar SearchPage
-import { ThemeProvider } from './context/ThemeContext'; // Importar ThemeProvider
+import SearchPage from './pages/SearchPage';
+import { ThemeProvider } from './context/ThemeContext';
 
 function App() {
   return (
-    <ThemeProvider> {/* Envolver o Router com ThemeProvider */}
+    <ThemeProvider>
       <Router>
-        <header>
-          {/* Removido themeImage */}
-        </header>
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/search" element={<SearchPage />} /> {/* Adicionar rota para SearchPage */}
+          <Route path="/search" element={<SearchPage />} />
         </Routes>
       </Router>
     </ThemeProvider>
   );
 }
-
 
 export default App;

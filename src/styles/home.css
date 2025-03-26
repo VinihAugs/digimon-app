@@ -28,6 +28,7 @@ body, html {
     height: 100vh;
     justify-content: flex-start;
     
+    
     @media (max-width: 640px) {
       background-position: center !important;
       background-size: contain !important;
@@ -49,6 +50,7 @@ body, html {
     margin-left: 177px;
     align-items: flex-start;
 
+
     @media (max-width: 640px) {
       margin-left: 0;
       background: rgba(0, 0, 0, 0.5);
@@ -62,9 +64,9 @@ body, html {
 .home-text {
     display: flex;
     align-items: center;
-
+    
     @media(max-width: 640px) {
-      gap: 20px;
+        gap: 20px;
     }
 }
 
@@ -101,15 +103,23 @@ body, html {
     width: 150px;
     margin-bottom: 2px;
 
+    @media (max-width: 1366px) {
+        max-width: 1200px;
+        margin: 0;
+        width: 90px;
+        position: unset;
+        margin-right: 10px;
+    }
+
     @media (max-width: 640px) {
       position: unset;
       width: 100px;
     }
 }
   
-.image-logo img {
+/* .image-logo img {
     width: 150px;
-}
+} */
   
 .text-logo{
     display: flex;
@@ -131,6 +141,7 @@ body, html {
     letter-spacing: 0;
     left: 2px;
 
+
     @media(max-width: 640px) {
       font-size: 14px;
       text-align: center;
@@ -148,6 +159,11 @@ body, html {
   margin-bottom: 10px;
   line-height: 1; 
   color: white;
+
+    @media(max-width: 1366px) {
+      margin-bottom: 0!important;
+      height: 105px;
+    }
 }
   
 .description {
@@ -159,6 +175,11 @@ body, html {
     color: #666666;
     margin-bottom: 1px;
     color: white;
+
+    @media(max-width: 1366px) {
+      font-size: 15px!important;
+      height: 120px;
+    }
 
     @media(max-width: 640px) {
       color: white;
@@ -291,8 +312,20 @@ body, html {
     align-items: flex-start;
     gap: 0.5rem;
     margin: 10px;
-    width: 100%; /* Garante que os botões fiquem alinhados à direita */
+    width: 100%;
+
+    @media(max-width: 640px) {
+        flex-direction: column;
+        align-items: flex-end !important;
+    }
 }
+
+.search-content-mobile {
+    @media (max-width: 640px) {
+      background-position: right !important;
+      background-size: cover !important;
+    }
+  }
 
 .theme-buttons button {
     width: 60px;
@@ -382,21 +415,38 @@ body, html {
 .header-container {
     display: flex;
     align-items: center;
-    justify-content: space-between; /* Espaço entre os dois grupos */
+    justify-content: space-between;
     margin: 20px;
     gap: 500px;
+
+    @media (min-width: 1200px) and (max-width: 1400px) {
+        margin: 0;
+        gap: 50px;
+        align-items: center;
+        justify-content: flex-start;
+        margin-top: 20px;
+
+    }
 }
 
 .header-container .group-left {
     display: flex;
     align-items: center;
-    gap: 1rem; /* Espaço entre o logo e o texto */
+    gap: 1rem;
 }
 
 .header-container .group-right {
     display: flex;
     align-items: center;
-    gap: 20px; /* Espaço entre o ícone, input e filtro */
+    gap: 20px;
+
+    @media(max-width: 640px) {
+        display: flex;
+        position: absolute;
+        gap: 8px;
+        flex-direction: row;
+        top: 85%;
+    }
 }
 
 .group-right .icon-container {
@@ -426,6 +476,10 @@ body, html {
     background-color: #fff;
     outline: none;
     transition: border-color 0.3s ease;
+
+    @media(max-width: 1366px) {
+        width: 180px;
+    }
 }
 
 .group-right input:focus {
@@ -444,10 +498,30 @@ body, html {
     background-color: #fff;
     outline: none;
     transition: border-color 0.3s ease;
+
+    @media(max-width: 1366px) {
+        width: 150px;
+    }
+
+    @media (max-width: 640px) {
+        width: 180px;
+    }
 }
 
 .group-right select:focus {
     border-color: #34AC40;
+}
+
+.group-right .element {
+    @media (min-width: 1200px) and (max-width: 1400px) {
+        display: flex;
+        gap: 20px;
+    }
+    @media(max-width: 640px) {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+    }
 }
 
 .header-container .icon {
@@ -536,6 +610,10 @@ body, html {
 .text-gray {
   color: #666666;
 
+    @media(max-width: 1366px) {
+        font-size: 45px;
+    }
+
   @media(max-width: 640px) {
     color: white;
     font-size: 45px;
@@ -547,7 +625,20 @@ body, html {
 }
 
 .text-white {
-  color: white !important; /* Corrigir a posição do !important */
+  color: white !important;
+    
+    @media(max-width: 1366px) {
+        font-size: 45px;
+    }
+
+  @media(max-width: 640px) {
+    color: white;
+    font-size: 45px;
+    text-align: center;
+    width: auto;
+    height: auto;
+    margin-left: 27px;
+  }
 }
 
 .search-page {
@@ -564,6 +655,11 @@ body, html {
     margin: 0;
     width: 100vw;
     height: 100vh;
+
+    @media (max-width: 640px) {
+        background-position: center !important;
+        background-size: contain !important;
+    }
 }
 
 .search-page .icone {
@@ -606,6 +702,17 @@ body, html {
     justify-content: flex-start;
     width: 100%;
     height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.6);
+
+    @media(max-width: 1366px) {
+        background: rgba(0, 0, 0, 0.5);
+        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.6);
+    }
+    @media (max-width: 640px) {
+        background: rgba(0, 0, 0, 0.5);
+        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.6);
+    }
 }
 
 .search-page .theme-buttons {
@@ -637,6 +744,26 @@ body, html {
     margin-left: 80px;
     margin-top: 80px;
     row-gap: 50px;
+
+    @media(max-width: 1366px) {
+        display: grid        ;
+        grid-template-columns: repeat(4, 1fr);
+        margin: 0;
+        justify-content: start;
+        margin-bottom: 0;
+        row-gap: 15px;
+        margin-left: 10px;
+    }
+
+    @media (max-width: 640px) {
+        grid-template-columns: repeat(2, 1fr)!important;
+        grid-template-rows: auto;
+        margin-left: 20px;
+        margin-top: 0px;
+        gap: 15px;
+        font-size-adjust: from-font;
+        width: 320px;
+    }
 }
 
 .search-page .pagination {
@@ -648,6 +775,25 @@ body, html {
     display: flex;
     gap: 24px;
     margin-right: 120px;
+
+    @media (max-width: 1366px) {
+        display: flex;
+        gap: 24px;
+        margin-right: 0;
+        margin-left: 0;
+        justify-content: center;
+        flex-direction:column;
+    }
+
+    @media (max-width: 640px) {
+        display: flex;
+        gap: 24px;
+        margin-right: 0;
+        margin-left: 0;
+        justify-content: center;
+        flex-direction: column;
+        right: 15px;
+    }    
 }
 
 .search-filters .icon-container {
@@ -725,11 +871,6 @@ body, html {
 
 .pagination button:hover {
   background-color: #aaaaaa; /* Cinza mais escuro ao passar o mouse */
-}
-
-/* Espaçamento entre linhas da grade */
-.digimon-grid {
-  row-gap: 50px;
 }
 
 /* Estilo da paginação */

@@ -6,17 +6,9 @@ const DigimonCard = ({ name, img, level, style, textColor }) => {
   const [showMessageBox, setShowMessageBox] = useState(false);
   const navigate = useNavigate();
 
-  const handleImageClick = () => {
-    setShowMessageBox(true);
-  };
-
-  const handleCloseMessageBox = () => {
-    setShowMessageBox(false);
-  };
-
-  const handleConfirmFavorite = () => {
-    navigate("/");
-  };
+  const handleImageClick = () => setShowMessageBox(true);
+  const handleCloseMessageBox = () => setShowMessageBox(false);
+  const handleConfirmFavorite = () => navigate("/");
 
   return (
     <div className="digimon-card-wrapper">
@@ -30,7 +22,7 @@ const DigimonCard = ({ name, img, level, style, textColor }) => {
             <strong>Nome:</strong> {name}
           </h3>
           <p className="digimon-level" style={{ color: textColor }}>
-            <strong>Nivel:</strong> {level}
+            <strong>Nível:</strong> {level}
           </p>
         </div>
       </div>

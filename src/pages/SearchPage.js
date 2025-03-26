@@ -9,10 +9,10 @@ import { themes, Notheme } from "./Home";
 const SearchPage = () => {
   const { selectedTheme, setSelectedTheme } = useCustomTheme();
   const location = useLocation();
-  const searchQuery = location.state?.searchQuery || ""; // Recebe o valor do input ou vazio
+  const searchQuery = location.state?.searchQuery || "";
   const defaultBackground = Notheme.fundo;
   const [digimons, setDigimons] = useState([]);
-  const [search, setSearch] = useState(searchQuery); // Inicializa com o valor recebido
+  const [search, setSearch] = useState(searchQuery);
   const [filter, setFilter] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const [selectedDigimon, setSelectedDigimon] = useState(null);
@@ -34,6 +34,10 @@ const SearchPage = () => {
     }
   }, [search, digimons]);
 
+  useEffect(() => {
+    setSelectedTheme(Notheme);
+  }, [setSelectedTheme]);
+
   const filteredDigimons = digimons.filter((digimon) =>
     digimon.name.toLowerCase().includes(search.toLowerCase()) &&
     (filter ? digimon.level === filter : true)
@@ -47,11 +51,13 @@ const SearchPage = () => {
 
   return (
     <div
-      className="search-page"
+      className={`search-page ${selectedTheme.name !== "sem_tema" ? "search-content-mobile" : ""}`}
       style={{
-        backgroundImage: `url(${background})`,
-        height: "100vh", // Ocupa 100% da altura da tela
-        overflow: "hidden", // Remove a rolagem
+        backgroundImage: `url(${selectedTheme.fundo || defaultBackground})`,
+        backgroundPosition: selectedTheme.name === "sem_tema" ? "right" : "center",
+        backgroundSize: selectedTheme.name === "sem_tema" ? "inherit" : "cover",
+        height: "100vh",
+        overflow: "hidden",
       }}
     >
       <div className="content">
@@ -73,24 +79,26 @@ const SearchPage = () => {
                 <img src="/screens/theme.png" alt="Theme Icon" />
               )}
             </div>
-            <input
-              type="text"
-              placeholder="Buscar Digimon"
-              value={search}
-              onChange={(e) => setSearch(e.target.value)}
-            />
-            <select
-              value={filter}
-              onChange={(e) => setFilter(e.target.value)}
-            >
-              <option value="">Level</option>
-              <option value="In Training">In Training</option>
-              <option value="Rookie">Rookie</option>
-              <option value="Champion">Champion</option>
-              <option value="Ultimate">Ultimate</option>
-              <option value="Mega">Mega</option>
-              <option value="Fresh">Fresh</option>
-            </select>
+            <div className="element">
+              <input
+                type="text"
+                placeholder="Buscar Digimon"
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
+              />
+              <select
+                value={filter}
+                onChange={(e) => setFilter(e.target.value)}
+              >
+                <option value="">Level</option>
+                <option value="In Training">In Training</option>
+                <option value="Rookie">Rookie</option>
+                <option value="Champion">Champion</option>
+                <option value="Ultimate">Ultimate</option>
+                <option value="Mega">Mega</option>
+                <option value="Fresh">Fresh</option>
+              </select>
+            </div>
           </div>
         </div>
         <div className="theme-buttons">
@@ -115,7 +123,7 @@ const SearchPage = () => {
               name={digimon.name} 
               img={digimon.img} 
               level={digimon.level} 
-              textColor={selectedTheme.name === "sem_tema" ? "black" : "white"} // Passar a cor como prop
+              textColor={selectedTheme.name === "sem_tema" ? "black" : "white"}
             />
           ))}
         </div>

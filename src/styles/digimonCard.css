@@ -1,35 +1,52 @@
 .digimon-card {
-  width: 302px; /* Largura fixa */
-  height: 132px; /* Altura fixa */
-  background-color: transparent; /* Fundo transparente */
-  display: flex; /* Layout flexível */
-  align-items: center; /* Alinhar itens verticalmente */
+  width: 302px;
+  height: 132px;
+  background-color: transparent;
+  display: flex;
+  align-items: center;
   padding: 10px;
-  font-family: 'Poppins', sans-serif; /* Fonte Poppins */
-  color: white; /* Letras brancas */
-  position: relative; /* Necessário para posicionar o texto "Escolher" */
-  cursor: pointer; /* Cursor de clique */
+  font-family: 'Poppins', sans-serif;
+  color: white;
+  position: relative;
+  cursor: pointer;
+
+  @media(max-width: 1366px) {
+    width: 85%;
+    height: 110px;
+    margin-bottom: 15px;
+  }
+
+  @media (max-width: 640px) {
+    width: 160px;
+    height: 80px;
+    justify-content: flex-start;
+    align-items: center;
+    margin: 0;
+    flex-direction: row;
+    padding: 0;
+    margin-bottom: 10px;
+  }
 }
 
 .image-container {
   position: relative;
-  width: 50%; /* Imagem ocupa 50% do card */
-  height: 100%; /* Altura total do card */
+  width: 50%; 
+  height: 100%;
 }
 
 .digimon-image {
   width: 100%;
-  height: 100%; /* Ajustar altura para ocupar o container */
+  height: 100%; 
   display: block;
   border-radius: 10%;
 }
 
 .digimon-card:hover .digimon-image {
-  filter: brightness(0.5); /* Escurece a imagem no hover */
+  filter: brightness(0.5); 
 }
 
 .digimon-card:hover .choose-overlay {
-  display: flex; /* Exibe o texto "Escolher" no hover */
+  display: flex; 
 }
 
 .choose-overlay {
@@ -55,21 +72,41 @@
 .digimon-info {
   display: flex;
   flex-direction: column;
-  justify-content: center; /* Centralizar verticalmente */
-  margin-left: 10px; /* Espaçamento de 5px entre imagem e texto */
-  width: 50%; /* Texto ocupa 50% do card */
+  justify-content: center;
+  margin-left: 10px;
+  width: 50%;
 }
 
 .digimon-name {
   font-size: 15px;
   font-weight:400;
-  margin: 0; /* Remover margens */
+  margin: 0;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+
+  @media(max-width: 1366px) {
+    color: #fff!important;
+  }
+
+  @media(max-width: 640px) {
+    font-size: 12px;
+    color: #fff!important;
+  }
 }
 
 .digimon-level {
   font-size: 15px;
   font-weight:400;
-  margin: 0; /* Remover margens */
+  margin: 0;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+
+  @media(max-width: 1366px) {
+    color: #fff!important;
+  }
+
+  @media(max-width: 640px) {
+    font-size: 12px;
+    color: #fff !important;
+  }
 }
 
 .overlay {
@@ -78,8 +115,8 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.5); /* Fundo semitransparente */
-  z-index: 999; /* Abaixo do message-box */
+  background-color: rgba(0, 0, 0, 0.5); 
+  z-index: 999; 
 }
 
 .message-box {
@@ -92,7 +129,7 @@
   padding: 20px;
   border-radius: 8px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  z-index: 1000; /* Acima do overlay */
+  z-index: 1000; 
   text-align: center;
 }
 
@@ -110,10 +147,10 @@
 }
 
 .message-box-buttons button:first-child {
-  background-color: #ccc; /* Botão "Não" */
+  background-color: #ccc; 
 }
 
 .message-box-buttons button:last-child {
-  background-color: #000; /* Botão "Sim" */
+  background-color: #000; 
   color: white;
 }
