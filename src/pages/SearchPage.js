@@ -35,7 +35,6 @@ const SearchPage = () => {
   }, [search, digimons]);
 
   useEffect(() => {
-    setSelectedTheme(Notheme);
   }, [setSelectedTheme]);
 
   const filteredDigimons = digimons.filter((digimon) =>
