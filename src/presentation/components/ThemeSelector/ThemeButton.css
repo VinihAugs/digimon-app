@@ -1,0 +1,36 @@
+.theme-button {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  transition: 0.3s;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  text-align: center;
+  border: none;
+  cursor: pointer;
+}
+
+.theme-button img {
+  margin-bottom: 5px;
+}
+
+.theme-button p {
+  font-size: x-small;
+  color: white;
+  margin: 0;
+  padding: 0;
+  margin-top: -4px;
+}
+
+.theme-button.selected {
+  background-color: white;
+  border: 2px solid var(--theme-color);
+}
+
+.theme-button.selected p {
+  color: var(--theme-color);
+}
+

@@ -1,0 +1,66 @@
+.element {
+  display: flex;
+  gap: 20px;
+}
+
+@media (max-width: 640px) {
+  .element {
+    flex-direction: column;
+    gap: 8px;
+  }
+}
+
+.element input {
+  width: 240px;
+  height: 40px;
+  padding: 0 10px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 16px;
+  font-family: 'Poppins', sans-serif;
+  color: #333;
+  background-color: #fff;
+  outline: none;
+  transition: border-color 0.3s ease;
+}
+
+@media (max-width: 1366px) {
+  .element input {
+    width: 180px;
+  }
+}
+
+.element input:focus {
+  border-color: #34AC40;
+}
+
+.element select {
+  width: 240px;
+  height: 40px;
+  padding: 0 10px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 16px;
+  font-family: 'Poppins', sans-serif;
+  color: #333;
+  background-color: #fff;
+  outline: none;
+  transition: border-color 0.3s ease;
+}
+
+@media (max-width: 1366px) {
+  .element select {
+    width: 150px;
+  }
+}
+
+@media (max-width: 640px) {
+  .element select {
+    width: 180px;
+  }
+}
+
+.element select:focus {
+  border-color: #34AC40;
+}
+

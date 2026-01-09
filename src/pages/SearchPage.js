@@ -1,150 +1,93 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
+import { useLocation } from "react-router-dom";
 import { useCustomTheme } from "../context/ThemeContext";
-import { useLocation } from 'react-router-dom';
+import { useFavoriteDigimon } from "../context/FavoriteDigimonContext";
+import { THEMES } from "../domain/constants";
+import { useDigimon, usePagination } from "../presentation/hooks";
+import {
+  SearchHeader,
+  ThemeSelector,
+  DigimonGrid,
+  Pagination,
+  Loading,
+  Error,
+  EmptyState,
+} from "../presentation/components";
+import { getBackgroundStyle } from "../presentation/utils";
 import "../styles/global.css";
 import "../styles/home.css";
-import DigimonCard from "../assets/DigimonCard";
-import { themes, Notheme } from "./Home";
 
 const SearchPage = () => {
   const { selectedTheme, setSelectedTheme } = useCustomTheme();
+  const { favoriteDigimon } = useFavoriteDigimon();
   const location = useLocation();
   const searchQuery = location.state?.searchQuery || "";
-  const defaultBackground = Notheme.fundo;
-  const [digimons, setDigimons] = useState([]);
-  const [search, setSearch] = useState(searchQuery);
-  const [filter, setFilter] = useState("");
-  const [currentPage, setCurrentPage] = useState(1);
-  const [selectedDigimon, setSelectedDigimon] = useState(null);
 
-  useEffect(() => {
-    fetch("https://digimon-api.vercel.app/api/digimon")
-      .then((response) => response.json())
-      .then((data) => setDigimons(data));
-  }, []);
+  const {
+    filteredDigimons,
+    selectedDigimon,
+    loading,
+    error,
+    search,
+    setSearch,
+    filter,
+    setFilter,
+  } = useDigimon(searchQuery, "");
 
-  useEffect(() => {
-    if (search) {
-      const foundDigimon = digimons.find((digimon) =>
-        digimon.name.toLowerCase() === search.toLowerCase()
-      );
-      setSelectedDigimon(foundDigimon || null);
-    } else {
-      setSelectedDigimon(null);
-    }
-  }, [search, digimons]);
+  const {
+    currentItems,
+    hasNext,
+    hasPrevious,
+    nextPage,
+    previousPage,
+  } = usePagination(filteredDigimons, [search, filter]);
 
-  useEffect(() => {
-  }, [setSelectedTheme]);
+  const backgroundStyle = {
+    ...getBackgroundStyle(selectedTheme),
+    height: "100vh",
+    overflow: "hidden",
+  };
 
-  const filteredDigimons = digimons.filter((digimon) =>
-    digimon.name.toLowerCase().includes(search.toLowerCase()) &&
-    (filter ? digimon.level === filter : true)
-  );
+  const containerClass = `search-page ${
+    selectedTheme.name !== "sem_tema" ? "search-content-mobile" : ""
+  }`;
 
-  const itemsPerPage = 12;
-  const totalPages = Math.ceil(filteredDigimons.length / itemsPerPage);
-  const currentItems = filteredDigimons.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage);
-
-  const background = selectedTheme.fundo || Notheme.fundo;
+  const textColor = selectedTheme.name === "sem_tema" ? "black" : "white";
 
   return (
-    <div
-      className={`search-page ${selectedTheme.name !== "sem_tema" ? "search-content-mobile" : ""}`}
-      style={{
-        backgroundImage: `url(${selectedTheme.fundo || defaultBackground})`,
-        backgroundPosition: selectedTheme.name === "sem_tema" ? "right" : "center",
-        backgroundSize: selectedTheme.name === "sem_tema" ? "inherit" : "cover",
-        height: "100vh",
-        overflow: "hidden",
-      }}
-    >
+    <div className={containerClass} style={backgroundStyle}>
       <div className="content">
-        <div className="header-container">
-          <div className="group-left">
-            <div className="icone">
-              <img src={selectedTheme.fundo === defaultBackground ? "/screens/Mask.png" : "/screens/Logo.png"} alt="Logo" />
-            </div>
-            <div className="text-container">
-              <h1 className={selectedTheme.name === "sem_tema" ? "title-orange" : "text-white"}>FPR</h1>
-              <h2 className={selectedTheme.name === "sem_tema" ? "subtitle-green" : "text-white"}>DIGIMON</h2>
-            </div>
-          </div>
-          <div className="group-right">
-            <div className="icon-container">
-              {selectedDigimon ? (
-                <img src={selectedDigimon.img} alt={selectedDigimon.name} />
-              ) : (
-                <img src="/screens/theme.png" alt="Theme Icon" />
-              )}
-            </div>
-            <div className="element">
-              <input
-                type="text"
-                placeholder="Buscar Digimon"
-                value={search}
-                onChange={(e) => setSearch(e.target.value)}
-              />
-              <select
-                value={filter}
-                onChange={(e) => setFilter(e.target.value)}
-              >
-                <option value="">Level</option>
-                <option value="In Training">In Training</option>
-                <option value="Rookie">Rookie</option>
-                <option value="Champion">Champion</option>
-                <option value="Ultimate">Ultimate</option>
-                <option value="Mega">Mega</option>
-                <option value="Fresh">Fresh</option>
-              </select>
-            </div>
-          </div>
-        </div>
-        <div className="theme-buttons">
-          {themes.map((theme) => (
-            <button
-              key={theme.name}
-              className={`theme-button ${selectedTheme.name === theme.name ? "selected" : ""}`}
-              style={{ 
-                backgroundColor: selectedTheme.name === theme.name ? "white" : theme.color,
-                color: selectedTheme.name === theme.name ? theme.color : "white"
-              }}
-              onClick={() => setSelectedTheme(theme)}> 
-              <img src={selectedTheme.name === theme.name ? `/button_light/${theme.name.toLowerCase()}.png` : theme.image} alt={theme.name} />
-              <p>{theme.name}</p>
-            </button>
-          ))}
-        </div>
-        <div className="digimon-grid">
-          {currentItems.map((digimon) => (
-            <DigimonCard 
-              key={digimon.name} 
-              name={digimon.name} 
-              img={digimon.img} 
-              level={digimon.level} 
-              textColor={selectedTheme.name === "sem_tema" ? "black" : "white"}
+        <SearchHeader
+          theme={selectedTheme}
+          favoriteDigimon={favoriteDigimon}
+          selectedDigimon={selectedDigimon}
+          search={search}
+          onSearchChange={setSearch}
+          filter={filter}
+          onFilterChange={setFilter}
+        />
+        <ThemeSelector
+          themes={THEMES}
+          selectedTheme={selectedTheme}
+          onThemeChange={setSelectedTheme}
+          className="theme-buttons"
+        />
+        {loading && <Loading message="Carregando Digimons..." />}
+        {error && <Error message={error} />}
+        {!loading && !error && (
+          <>
+            {currentItems.length > 0 ? (
+              <DigimonGrid digimons={currentItems} textColor={textColor} />
+            ) : (
+              <EmptyState message="Nenhum Digimon encontrado" />
+            )}
+            <Pagination
+              hasPrevious={hasPrevious}
+              hasNext={hasNext}
+              onPrevious={previousPage}
+              onNext={nextPage}
             />
-          ))}
-        </div>
-        {totalPages > 1 && (
-          <div className="pagination">
-            {currentPage > 1 && (
-              <button 
-                onClick={() => setCurrentPage(currentPage - 1)} 
-                className="pagination-button"
-              >
-                ← Anterior
-              </button>
-            )}
-            {currentPage < totalPages && (
-              <button 
-                onClick={() => setCurrentPage(currentPage + 1)} 
-                className="pagination-button"
-              >
-                Próximo →
-              </button>
-            )}
-          </div>
+          </>
         )}
       </div>
     </div>

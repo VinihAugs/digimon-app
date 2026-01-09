@@ -1,0 +1,52 @@
+.action-buttons {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 103px;
+  margin-top: 1rem;
+  width: 495px;
+}
+
+@media (max-width: 640px) {
+  .action-buttons {
+    width: 50%;
+    margin-left: 27px;
+    flex-direction: column;
+    gap: 10px;
+  }
+}
+
+.choose-digimon {
+  border-radius: 100px;
+  width: 266px;
+  height: 43px;
+  background-color: #F46D1B !important;
+  border: none;
+  color: white;
+  font-family: 'Poppins', sans-serif;
+  font-weight: bold;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.view-all {
+  border-radius: 100px;
+  width: 166px;
+  height: 43px;
+  background-color: #34AC40;
+  border: none;
+  color: white;
+  font-family: 'Poppins', sans-serif;
+  font-weight: bold;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+@media (max-width: 640px) {
+  .view-all {
+    width: 266px;
+  }
+}
+

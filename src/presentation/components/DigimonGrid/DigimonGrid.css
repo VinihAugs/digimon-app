@@ -1,0 +1,36 @@
+.digimon-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+  margin-bottom: 1rem;
+  width: 100%;
+  margin-right: 80px;
+  margin-left: 80px;
+  margin-top: 80px;
+  row-gap: 50px;
+}
+
+@media (max-width: 1366px) {
+  .digimon-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    margin: 0;
+    justify-content: start;
+    margin-bottom: 0;
+    row-gap: 15px;
+    margin-left: 10px;
+  }
+}
+
+@media (max-width: 640px) {
+  .digimon-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+    grid-template-rows: auto;
+    margin-left: 20px;
+    margin-top: 0px;
+    gap: 15px;
+    font-size-adjust: from-font;
+    width: 320px;
+  }
+}
+

@@ -1,0 +1,37 @@
+.home-text {
+  display: flex;
+  align-items: center;
+}
+
+.home-text .image-logo {
+  display: flex;
+  position: relative;
+  left: -60px;
+  width: 150px;
+  margin-bottom: 2px;
+}
+
+@media (max-width: 1366px) {
+  .home-text .image-logo {
+    max-width: 1200px;
+    margin: 0;
+    width: 90px;
+    position: unset;
+    margin-right: 10px;
+  }
+}
+
+@media (max-width: 640px) {
+  .home-text .image-logo {
+    position: unset;
+    width: 100px;
+  }
+}
+
+.text-logo {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  color: white;
+}
+
